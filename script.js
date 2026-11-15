@@ -1,0 +1,25 @@
+const items=[
+{name:'Marinara',price:100,cat:'pizza',img:'marinara',desc:'Pomodoro · Albahaca · Orégano · Ajo · Oliva E.V.'},
+{name:'Regina Margherita',price:130,cat:'pizza',img:'margherita',desc:'Pomodoro · Albahaca · Mozzarella · Oliva E.V.'},
+{name:'Pepperoni',price:130,cat:'pizza',img:'pepperoni',desc:'Pomodoro · Mozzarella · Pepperoni'},
+{name:'Hawaiana',price:150,cat:'pizza',desc:'Mozzarella · Jamón de pavo · Piña · Parmesano'},
+{name:'Vegetariana',price:150,cat:'pizza',desc:'Pomodoro · Espinacas · Champiñones · Cebolla morada · Pimientos · Mozzarella'},
+{name:'Provola e Pepe',price:160,cat:'pizza',img:'provola',desc:'Pomodoro · Albahaca · Provolone ahumado · Pimienta · Oliva E.V.'},
+{name:'Diavola',price:170,cat:'pizza',img:'diavola',desc:'Pomodoro · Albahaca · Mozzarella · Salami · Chile serrano · Oliva E.V.'},
+{name:'Prosciuto Funghi',price:170,cat:'pizza',desc:'Pomodoro · Albahaca · Mozzarella · Jamón de pavo · Champiñones'},
+{name:'Bianche',price:180,cat:'pizza',img:'bianca',desc:'Espinacas · Cebolla morada · Mozzarella · Jamón serrano · Oliva E.V.'},
+{name:'Margherita del Pulcinella',price:180,cat:'pizza',desc:'Pomodorini en conserva · Provolone ahumado · Pesto de albahaca · Oliva E.V.'},
+{name:'Kilauea',price:200,cat:'pizza',desc:'Mozzarella · Jamón de pavo · Tocino · Piña · Miel picante · Parmesano'},
+{name:'Quattro Formaggi',price:200,cat:'pizza',desc:'Albahaca · Gorgonzola · Provolone · Mozzarella · Parmesano'},
+{name:'Tre Carni',price:200,cat:'pizza',desc:'Pomodoro · Albahaca · Mozzarella · Pepperoni · Salchicha de res · Tocino'},
+{name:'Frutti di Mare',price:230,cat:'pizza',img:'frutti',desc:'Base marinara · Pulpo · Camarón · Ralladura de limón amarillo · Oliva E.V.'},
+{name:'Bruschetta al Pesto',price:110,cat:'antipasti',desc:'Pan dorado · Pesto · Burrata cremosa · Tomates cherry · Albahaca (3 piezas)'},
+{name:'Involtini di Prosciutto',price:120,cat:'antipasti',desc:'Queso crema y arúgula envueltos en jamón serrano · Vinagre balsámico (4 piezas)'},
+{name:'Insalata Caprese',price:130,cat:'antipasti',img:'caprese',desc:'Lechuga · Tomate · Mozzarella fresca · Pesto de albahaca · Oliva E.V.'},
+{name:'Aglio e Olio',price:90,cat:'pasta',desc:'Spaghetti al dente · Ajo · Pimienta negra · Perejil · Chile quebrado · Parmesano'},
+{name:'Al Limone',price:110,cat:'pasta',img:'pasta',desc:'Fettuccine al dente · Limón amarillo · Pimienta negra · Oliva · Parmesano · Albahaca'},
+{name:'Al Pomodoro',price:110,cat:'pasta',desc:'Spaghetti al dente · Pomodoro · Ajo · Albahaca · Parmesano'},
+{name:'Tiramisú',price:85,cat:'pasta',desc:'El clásico postre italiano'},
+{name:'Calzone Dolce',price:130,cat:'pasta',desc:'Nutella · Nueces · Azúcar glass'}
+];
+const grid=document.querySelector('#menu-grid');function render(filter='all'){grid.innerHTML=items.filter(x=>filter==='all'?['Marinara','Regina Margherita','Diavola','Provola e Pepe','Frutti di Mare','Insalata Caprese'].includes(x.name):x.cat===filter).map(x=>`<article class="menu-card">${x.img?`<img src="assets/${x.img}.webp" alt="${x.name}" loading="lazy">`:'<div class="placeholder" aria-hidden="true">✺</div>'}<div class="menu-card-content"><div class="menu-card-top"><h3>${x.name}</h3><span class="price">$${x.price}</span></div><p>${x.desc}</p></div></article>`).join('')};render();document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.filter.active')?.classList.remove('active');b.classList.add('active');render(b.dataset.filter)}));const hamburger=document.querySelector('#hamburger'),nav=document.querySelector('#nav');hamburger.addEventListener('click',()=>{let open=nav.classList.toggle('open');hamburger.setAttribute('aria-expanded',String(open));hamburger.textContent=open?'✕':'☰'});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');hamburger.setAttribute('aria-expanded','false');hamburger.textContent='☰'}));document.querySelector('#year').textContent=new Date().getFullYear();
